@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Обнаруженные проблемы</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="container mt-5">
+    <h1>Обнаруженные проблемы</h1>
+    <div th:each="el : ${issue}" class="alert alert-info mt-2">
+        <h3 th:text="${el.title}"/>
+        <p>Автор: <span th:text="${el.author}"></span></p>
+        <p>Статус: <span th:text="${el.status}"></span></p>
+        <p>Дата создания: <span th:text="${el.time}"></span></p>
+        <p>Описание проблемы: <span th:text="${el.description}"></span></p>
+        <a th:href="'/issue/' + ${el.id} + '/edit'" class="btn btn-warning">Изменить</a><br><br>
+        <form th:action="'/issue/' + ${el.id} + '/remove'" method="post">
+            <button class="btn btn-warning" type="submit">Удалить</button>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
